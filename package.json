@@ -1,0 +1,19 @@
+{
+  "name": "instamais",
+  "version": "1.0.0",
+  "description": "Social network for sharing photos",
+  "main": "src/server.js",
+  "repository": "https://github.com/diegomais/instamais.git",
+  "author": "Diego Mais <diegomais@live.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/server.js",
+    "server": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
