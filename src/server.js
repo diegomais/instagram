@@ -13,8 +13,8 @@ const app = express();
 // Connect Database
 connectDB();
 
-// Respond with 'Hello Instamais!' when a GET request is made to the root URL (/) or route.
-app.get('/', (req, res) => res.send('Hello Instamais!'));
+// Load the routes module in the app.
+app.use('/api', require('./routes'));
 
 /** Create a constant reference to port declared on environment variables
  * or set the port of remote server to 3333.  */
