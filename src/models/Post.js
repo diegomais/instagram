@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const PostSchema = new mongoose.Schema(
   {
     author: { type: String, required: [true, "can't be blank."] },
+    image: { type: String, required: true },
     place: { type: String },
     description: { type: String },
     hashtags: { type: String },
