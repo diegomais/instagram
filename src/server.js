@@ -1,6 +1,9 @@
 // Import Express.js: the fast, unopinionated, minimalist web framework for node.
 const express = require('express');
 
+// Import cors package: provide a Connect/Express middleware that can be used to enable CORS with various options.
+var cors = require('cors');
+
 // Import path module: utilities for working with file and directory paths.
 const path = require('path');
 
@@ -15,6 +18,9 @@ const app = express();
 
 // Connect Database
 connectDB();
+
+// Enable All CORS Requests.
+app.use(cors());
 
 // Serve "/files" route to images files in "../uploads/resized".
 app.use(
