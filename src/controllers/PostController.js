@@ -54,6 +54,8 @@ module.exports = {
       image: fileName
     });
 
+    req.io.emit('post', post);
+
     // Return post saved on database.
     return res.json(post);
   }

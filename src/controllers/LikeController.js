@@ -15,6 +15,8 @@ module.exports = {
     // Save changes to database.
     await post.save();
 
+    req.io.emit('like', post);
+
     // Return post saved on database.
     return res.json(post);
   }

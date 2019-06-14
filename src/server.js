@@ -16,11 +16,23 @@ const connectDB = require('./config/db');
 // Create an Express application. The express() function is a top-level function exported by the express module.
 const app = express();
 
+// Import HTTP server and client. Return instance of http.Server.
+const server = require('http').Server(app);
+
+// Import Socket.IO: enables real-time bidirectional event-based communication. Attach socket.io to http.Server instance.
+const io = require('socket.io')(server);
+
 // Connect Database
 connectDB();
 
 // Enable All CORS Requests.
 app.use(cors());
+
+// Create a middleware to provide socket.io to all requests.
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
 
 // Serve "/files" route to images files in "../uploads/resized".
 app.use(
@@ -36,4 +48,4 @@ app.use('/api', require('./routes'));
 const PORT = process.env.PORT || 3333;
 
 // Bind and listen for connections on the specified port.
-app.listen(PORT, () => console.log(`Server started on port ${PORT}.`));
+server.listen(PORT, () => console.log(`Server started on port ${PORT}.`));
