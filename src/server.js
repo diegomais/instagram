@@ -1,6 +1,9 @@
 // Import Express.js: the fast, unopinionated, minimalist web framework for node.
 const express = require('express');
 
+// Import path module: utilities for working with file and directory paths.
+const path = require('path');
+
 // Import dotenv module: load environment variables from '.env'.
 const dotenv = require('dotenv').config();
 
@@ -12,6 +15,12 @@ const app = express();
 
 // Connect Database
 connectDB();
+
+// Serve "/files" route to images files in "../uploads/resized".
+app.use(
+  '/files',
+  express.static(path.resolve(__dirname, '..', 'uploads', 'resized'))
+);
 
 // Load the routes module in the app.
 app.use('/api', require('./routes'));
