@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 import './Feed.css';
 
@@ -16,8 +17,21 @@ const Feed = () => {
       const res = await axios.get('http://localhost:3333/api/posts');
       setFeed(res.data);
     };
+    registerToSocket();
     fetchFeed();
   }, []);
+
+  const registerToSocket = () => {
+    const socket = io('http://localhost:3333');
+
+    socket.on('post', newPost => setFeed(prevState => [newPost, ...prevState]));
+
+    socket.on('like', likedPost =>
+      setFeed(prevState =>
+        prevState.map(post => (post._id === likedPost._id ? likedPost : post))
+      )
+    );
+  };
 
   const handleLike = id => {
     axios.post(`http://localhost:3333/api/posts/${id}/like`);
