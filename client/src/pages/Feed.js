@@ -10,6 +10,7 @@ import send from '../assets/send.svg';
 
 const Feed = () => {
   const [feed, setFeed] = useState([]);
+
   useEffect(() => {
     const fetchFeed = async () => {
       const res = await axios.get('http://localhost:3333/api/posts');
@@ -17,6 +18,11 @@ const Feed = () => {
     };
     fetchFeed();
   }, []);
+
+  const handleLike = id => {
+    axios.post(`http://localhost:3333/api/posts/${id}/like`);
+  };
+
   return (
     <section id='post-list'>
       {feed.map(post => (
@@ -31,7 +37,9 @@ const Feed = () => {
           <img src={`http://localhost:3333/files/${post.image}`} alt='Post' />
           <footer>
             <div className='actions'>
-              <img src={like} alt='Like' />
+              <button type='button' onClick={() => handleLike(post._id)}>
+                <img src={like} alt='Like' />
+              </button>
               <img src={comment} alt='Comment' />
               <img src={send} alt='Send' />
             </div>
