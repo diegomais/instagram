@@ -16,7 +16,7 @@ const Feed = () => {
 
   useEffect(() => {
     const fetchFeed = async () => {
-      const res = await axios.get('http://localhost:3333/api/posts');
+      const res = await axios.get('/api/posts');
       setFeed(res.data);
       setLoading(false);
     };
@@ -25,7 +25,7 @@ const Feed = () => {
   }, []);
 
   const registerToSocket = () => {
-    const socket = io('http://localhost:3333');
+    const socket = io('/api');
 
     socket.on('post', newPost => setFeed(prevState => [newPost, ...prevState]));
 
@@ -37,7 +37,7 @@ const Feed = () => {
   };
 
   const handleLike = id => {
-    axios.post(`http://localhost:3333/api/posts/${id}/like`);
+    axios.post(`/api/posts/${id}/like`);
   };
 
   return loading ? (
@@ -53,7 +53,7 @@ const Feed = () => {
             </div>
             <img src={more} alt='More' />
           </header>
-          <img src={`http://localhost:3333/files/${post.image}`} alt='Post' />
+          <img src={`/files/${post.image}`} alt='Post' />
           <footer>
             <div className='actions'>
               <button type='button' onClick={() => handleLike(post._id)}>

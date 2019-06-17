@@ -34,7 +34,7 @@ const New = props => {
     data.append('hashtags', hashtags);
 
     // Send data to database
-    await axios.post('http://localhost:3333/api/posts', data);
+    await axios.post('/api/posts', data);
 
     // Redirect user to root
     props.history.push('/');
