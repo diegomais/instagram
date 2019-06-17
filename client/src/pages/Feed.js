@@ -8,14 +8,17 @@ import more from '../assets/more.svg';
 import like from '../assets/like.svg';
 import comment from '../assets/comment.svg';
 import send from '../assets/send.svg';
+import spinner from '../assets/spinner.gif';
 
 const Feed = () => {
   const [feed, setFeed] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchFeed = async () => {
       const res = await axios.get('http://localhost:3333/api/posts');
       setFeed(res.data);
+      setLoading(false);
     };
     registerToSocket();
     fetchFeed();
@@ -37,7 +40,9 @@ const Feed = () => {
     axios.post(`http://localhost:3333/api/posts/${id}/like`);
   };
 
-  return (
+  return loading ? (
+    <img className='spinner' src={spinner} alt='Loading' />
+  ) : (
     <section id='post-list'>
       {feed.map(post => (
         <article key={post._id}>

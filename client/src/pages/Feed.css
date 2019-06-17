@@ -33,7 +33,7 @@ section#post-list article header .user-info span.place {
   margin-top: 3px;
 }
 
-section#post-list article > img {
+section#post-list article>img {
   width: 100%;
 }
 
@@ -65,4 +65,10 @@ section#post-list article footer p {
 section#post-list article footer p span {
   color: #003569;
   display: block;
+}
+
+.spinner {
+  display: block;
+  margin: 50px auto;
+  width: 10%;
 }
