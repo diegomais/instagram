@@ -24,6 +24,6 @@
   },
   "devDependencies": {
     "concurrently": "4.1.2",
-    "nodemon": "2.0.20"
+    "nodemon": "2.0.22"
   }
 }
